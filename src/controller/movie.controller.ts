@@ -6,8 +6,12 @@ const DEFAULT_PAGE = 0
 
 export default class MovieController {
     createMovie = async (movieData: IMovie) => {
-        const newMovie = await new Movie({...movieData}).save()
-        return newMovie
+        try {
+            const newMovie = await new Movie({...movieData}).save()
+            return newMovie
+        } catch (error) {
+            throw error
+        }
     }
 
     getMovies = async (page: number, search?: string) => {
@@ -16,11 +20,21 @@ export default class MovieController {
         const movieList = await Movie.find(searchTerm)
             .skip(page ? (page - 1) * DEFAULT_PAGE_SIZE : DEFAULT_PAGE)
             .limit(DEFAULT_PAGE_SIZE)
+            .exec()
         return movieList
     }
 
     getMovieById = async (movieId: string) => {
-        const movie = await Movie.findById(movieId)
-        return movie
+        try {
+            const movie = await Movie.findById(movieId).exec()
+            return movie
+        } catch (e) {
+            throw e
+        }
+    }
+
+    deleteMovie = async (movieId: string) => {
+        const count = await Movie.deleteOne(movieId).exec()
+        return count.ok!
     }
 }
