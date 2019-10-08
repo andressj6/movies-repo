@@ -42,6 +42,18 @@ app.get('/movies/:id', (req, res) => {
     })
 })
 
+app.patch('/movies/:id', (req, res) => {
+    const id = req.params.id
+
+    movieController.updateMovie(id, req.body as IMovie).then((result) => {
+        if (!result) {
+            res.status(404).send('Movie not Found')
+        } else {
+            res.send(`Updated entries: ${result.ok}`)
+        }
+    })
+})
+
 app.delete('/movies/:id', (req, res) => {
     const id = req.params.id
     const count = movieController.deleteMovie(id)

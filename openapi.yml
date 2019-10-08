@@ -92,7 +92,7 @@ paths:
               $ref: '#/components/schemas/Movie'
       responses:
         '200':
-          description: Updated
+          description: 'Updated entries: 1'
         '404':
           description: if the movie with provided id doesn't exist
         
