@@ -1,0 +1,187 @@
+openapi: 3.0.0
+info:
+  title: Movies API
+  description: Movies management application API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001/
+    description: Development server
+paths:
+  /movies:
+    post:
+      summary: creates a new movie
+      requestBody:
+        description: the movie data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+      responses:
+        '201':
+          description: Created
+    get:
+      summary: Returns a list of movies, filtered and/or paged
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          description: Filters the list of movies by title
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          description: The page which you want to retrieve the movies
+          schema:
+            type: number
+      responses:
+        '200':    # status code
+          description: A JSON array of movies
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      example: d930k0d029k20d9k092dk
+                    title:
+                      type: string
+                      example: 'Spectre'
+                    shortDescription:
+                      type: string
+                      example: '007 against Spectre'
+                    releaseDate:
+                      type: number
+                      example: 2001
+                    images:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          'type':
+                            type: string
+                            enum: [COVER, POSTER]
+                            example: COVER
+                          url:
+                            type: string
+                            example: 'http://www.pudim.com.br/pudim.jpg'
+                    genres:
+                      type: string
+                      enum: [ACTION, SUSPENSE, COMEDY, ADVENTURE, ANIMATION]
+                      example: ACTION
+  /movies/{id}:
+    patch:
+      summary: updates an existing movie
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          description: the Id of the movie being updated
+          schema:
+            type: string
+      requestBody:
+        description: the movie data you want to updated. You can add only the fields you want to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+      responses:
+        '200':
+          description: Updated
+        '404':
+          description: if the movie with provided id doesn't exist
+        
+    get:
+      summary: Returns a specific movies by its' ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: the Id of the movie being retrieved
+          schema:
+            type: string
+      responses:
+        '200':    # status code
+          description: The selected movie data
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      example: d930k0d029k20d9k092dk
+                    title:
+                      type: string
+                      example: 'Spectre'
+                    shortDescription:
+                      type: string
+                      example: '007 against Spectre'
+                    releaseDate:
+                      type: number
+                      example: 2001
+                    images:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          'type':
+                            type: string
+                            enum: [COVER, POSTER]
+                            example: COVER
+                          url:
+                            type: string
+                            example: 'http://www.pudim.com.br/pudim.jpg'
+                    genres:
+                      type: string
+                      enum: [ACTION, SUSPENSE, COMEDY, ADVENTURE, ANIMATION]
+                      example: ACTION
+        '404':
+          description: If the movie doesn't exist
+"components": {
+  "schemas": {
+    "Movie": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+        },
+        "title": {
+          "type": "string"
+        },
+        "shortDescription": {
+          "type": "string"
+        },
+        "releaseDate": {
+          "type": "number"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "genres": {
+          "type": "string",
+          "enum": ["ACTION", "SUSPENSE", "COMEDY", "ADVENTURE", "ANIMATION"]
+        }
+      }
+    }
+  }
+}
+ 

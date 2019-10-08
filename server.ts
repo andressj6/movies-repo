@@ -34,7 +34,11 @@ app.get('/movies', (req, res) => {
 app.get('/movies/:id', (req, res) => {
     const id = req.params.id
     movieController.getMovieById(id).then((movie) => {
-        res.send(movie)
+        if (!movie) {
+            res.status(404).send('Movie not Found')
+        } else {
+            res.send(movie)
+        }
     })
 })
 

@@ -29,7 +29,7 @@ export default class MovieController {
             const movie = await Movie.findById(movieId).exec()
             return movie
         } catch (e) {
-            throw e
+            return null
         }
     }
 
