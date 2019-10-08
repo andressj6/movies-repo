@@ -1,12 +1,11 @@
-import Movie from '../model/movie.model'
-import {ICreateMovieApiRequest} from '../model/movie.api'
+import Movie, {IMovie} from '../model/movie.model'
 
 const DEFAULT_PAGE_SIZE = 10
 
 const DEFAULT_PAGE = 0
 
 export default class MovieController {
-    createMovie = async (movieData: ICreateMovieApiRequest) => {
+    createMovie = async (movieData: IMovie) => {
         const newMovie = await new Movie({...movieData}).save()
         return newMovie
     }

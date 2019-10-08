@@ -1,8 +1,7 @@
 import express from 'express'
 import connectDb from './src/config/db'
 import MovieController from './src/controller/movie.controller'
-import {ICreateMovieApiRequest} from './src/model/movie.api'
-import {ObjectId} from 'bson'
+import {IMovie} from 'model/movie.model'
 
 const app = express()
 app.use(express.json())
@@ -13,9 +12,9 @@ connectDb()
 const movieController = new MovieController()
 
 app.post('/movies', (req, res) => {
-    const movie = req.body as ICreateMovieApiRequest
+    const movie = req.body as IMovie
     movieController
-        .createMovie({...movie})
+        .createMovie(movie)
         .then((m) => {
             res.send(m)
         })
