@@ -34,8 +34,9 @@ export default class MovieController {
     }
 
     deleteMovie = async (movieId: string) => {
-        const count = await Movie.deleteOne(movieId).exec()
-        return count.ok!
+        const count = await Movie.deleteOne({_id: movieId}).exec()
+
+        return count.deletedCount
     }
 
     updateMovie = async (movieId: string, patchData: Partial<IMovie>) => {

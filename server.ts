@@ -56,12 +56,13 @@ app.patch('/movies/:id', (req, res) => {
 
 app.delete('/movies/:id', (req, res) => {
     const id = req.params.id
-    const count = movieController.deleteMovie(id)
-    if (count) {
-        res.send(`Movie deleted: ${id}`)
-    } else {
-        res.send(`No movie found with id ${id}`)
-    }
+    movieController.deleteMovie(id).then((count) => {
+        if (count) {
+            res.send(`Movie deleted: ${id}`)
+        } else {
+            res.send(`No movie found with id ${id}`)
+        }
+    })
 })
 
 app.listen(port, () => console.log(`App listening on port ${port}`)) // tslint:disable-line
