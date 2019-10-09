@@ -10,7 +10,8 @@
     "build": "tsc",
     "start": "node build/server.js",
     "build-and-start": "tsc && node build/server.js",
-    "init-database": "node build/src/config/fillDatabase.js"
+    "init-database": "node build/src/config/fillDatabase.js",
+    "start-docker": "yarn build && yarn init-database && yarn start"
   },
   "dependencies": {
     "express": "^4.17.1",

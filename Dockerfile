@@ -1,4 +1,4 @@
-FROM node:11-alpine
+FROM node:latest
 
 WORKDIR .
 
@@ -8,8 +8,8 @@ RUN yarn install
 
 COPY . .
 
-EXPOSE 3000
+RUN yarn build
 
-RUN npm install -g nodemon --quiet
+EXPOSE 3001
 
-CMD [ "yarn", "nodemon", "build/server.js" ] 
+CMD ["yarn", "start-docker" ] 

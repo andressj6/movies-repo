@@ -1,26 +1,26 @@
 version: '3'
-
 services:
   server:
-    container_name: movies-server
-    build: '.'
+    container_name: movies-app
+    build: .
     restart: always
-    volumes:
-      - ./:/app
-      - ./:/app/node_modules
     environment:
-      NODE_ENV: development
+      MONGO_SERVER_ADDR: db
+    volumes:
+      - './:/app'
+      - './:/app/node_modules'
     depends_on:
       - db
     links:
       - db
     ports:
-      - '3000:3000'
-
+      - '3001:3001'
+    
   db:
-    image: 'mongo'
-    container_name: movies-mongodb
+    image: mongo
+    container_name: movies-db
     ports:
       - '27017:27017'
     volumes:
-      - ./data/db:/data/db
+      - './data/db:/data/db'
+    command: '--quiet'

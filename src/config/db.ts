@@ -1,9 +1,13 @@
 import mongoose from 'mongoose'
 
+
+
+
 const connectDb = async () => {
+    const MONGO_SERVER_ADDR = process.env.MONGO_SERVER_ADDR || 'localhost'
     mongoose.set('useCreateIndex', true)
     try {
-        await mongoose.connect('mongodb://localhost:27017/movies', {
+        await mongoose.connect(`mongodb://${MONGO_SERVER_ADDR}:27017/movies`, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
