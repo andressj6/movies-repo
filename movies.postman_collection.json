@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "08edee5a-f425-4bd5-93a3-619726e39f27",
+		"name": "Movies API",
+		"description": "Collection for creating movies in the api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Movies Filtered and Paged",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/movies?filter&page",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"movies"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": null,
+							"description": "Filtering by title"
+						},
+						{
+							"key": "page",
+							"value": null,
+							"description": "Which page is requested"
+						}
+					]
+				},
+				"description": "For getting all the movies"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Movie",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Title\",\n  \"shortDescription\": \"Short Description\",\n  \"duration\": 100,\n  \"releaseDate\": 2011,\n  \"images\": [{\n    \"type\": \"cover\",\n    \"url\": \"http://www.pudim.com.br\"\n  }],\n  \"genres\": [\"comedy\"]\n}\n  "
+				},
+				"url": {
+					"raw": "http://localhost:3001/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Movies",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"new Title\"\n}\n  "
+				},
+				"url": {
+					"raw": "http://localhost:3001/movies/<id>",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"movies",
+						"<id>"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "For updating specific fields of the movie"
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting Movies",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/movies/<id>",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"movies",
+						"<id>"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
