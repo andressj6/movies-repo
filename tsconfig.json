@@ -17,6 +17,7 @@
       }
   },
   "include": [
-      "server.ts"
+      "server.ts",
+      "src/config/fillDatabase.ts"
   ]
 }
